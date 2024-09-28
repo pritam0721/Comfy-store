@@ -54,6 +54,7 @@ const SingleProduct = () => {
             <h4 className='text-md font-medium tracking-wider capitalize'>
               colors
             </h4>
+            //single product page without the colors ... 
             <div className='mt-2'>
               {colors.map((color) => {
                 return <button key={color} type='button' ></button>;
