@@ -1,5 +1,5 @@
 import { Link, useLoaderData } from 'react-router-dom';
-import { customFetch, formatPrice } from '../utils';
+import { customFetch, formatPrice, generateAmountOptions } from '../utils';
 import { useState } from 'react';
 
 const url = '/products';
@@ -14,7 +14,7 @@ const SingleProduct = () => {
   const { image, title, price, description, colors, company } =
     product.attributes;
   const dollarsAmount = formatPrice(price);
-  const [color, setColor] = useState(colors[0]);
+  const [productColor, setProductColor] = useState(colors[0]);
   const [amount, setAmount] = useState(1);
 
   const handleAmount = (e) => {
@@ -54,15 +54,47 @@ const SingleProduct = () => {
             <h4 className='text-md font-medium tracking-wider capitalize'>
               colors
             </h4>
-           
-            {/* single product page without the colors ... */}
             <div className='mt-2'>
               {colors.map((color) => {
-                return <button key={color} type='button' ></button>;
+                return (
+                  <button
+                    key={color}
+                    type='button'
+                    className={` badge w-6 h-6 mr-2 ${
+                      color === productColor && 'border-2 border-secondary'
+                    }`}
+                    style={{ backgroundColor: color }}
+                    onClick={() => setProductColor(color)}
+                  ></button>
+                );
               })}
             </div>
           </div>
-          
+          {/* Amount */}
+          <div className='form-control w-full max-w-xs'>
+            <label className='label' htmlFor='amount'>
+              <h4 className='textarea-md font-medium -tracking-wider capitalize'>
+                amount
+              </h4>
+            </label>
+            <select
+              id='amount'
+              className='select select-secondary select-bordered select-md '
+              value={amount}
+              onChange={handleAmount}
+            >
+              {generateAmountOptions(3)}
+            </select>
+          </div>
+          {/* Cart Btn */}
+          <div className='mt-10'>
+            <button
+              className='btn btn-secondary btn-md'
+              onClick={() => console.log('added to the bag ')}
+            >
+              Add to cart
+            </button>
+          </div>
         </div>
       </div>
     </section>
