@@ -21,6 +21,8 @@ import { loader as productsLoader } from './pages/Products';
 
 //* actions
 
+// Page Router
+
 const router = createBrowserRouter([
   {
     path: '/',
